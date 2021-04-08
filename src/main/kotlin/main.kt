@@ -1,35 +1,23 @@
 fun main() {
- val pedidos: MutableMap<Int, Double> = mutableMapOf(
-     Pair(1, 20.0),
-     Pair(2, 34.0),
-     3 to 50.0
- )
+    val pedidos: List<Pedido> = listOf(
+        Pedido(1, 20.0),
+        Pedido(2, 60.0),
+        Pedido(3, 30.0),
+        Pedido(4, 70.0),
+    )
     println(pedidos)
-   val pedido:Double? = pedidos[3]
-    pedido?.let {
-        println("pedido $it")
+  val pedidosMapeados:Map<Int, Pedido> = pedidos.associateBy { pedido -> pedido.numero }
+
+    println(pedidosMapeados)
+    println(pedidosMapeados[1])
+
+val pedidosFreteGratis= pedidos.associateWith { pedido ->
+        pedido.valor>50.0
     }
-    for (p: Map.Entry<Int,Double> in pedidos){
-        println("numedo do pedido: ${p.key}")
-        println("numedo do pedido: ${p.value}")
-    }
-    pedidos[4] = 70.0
-    println(pedidos)
-    pedidos.put(5,80.0)
-    println(pedidos)
-    pedidos[1]=100.0
-    println(pedidos)
-    pedidos.putIfAbsent(6,200.0)
-    println(pedidos)
-    pedidos.putIfAbsent(6,300.0)
-    println(pedidos)
-
-    pedidos.remove(6)
-    println(pedidos)
-    pedidos.remove(3, 50.0)
-    println(pedidos)
-
-
+    println(pedidosFreteGratis)
 }
+
+
+data class Pedido(val numero: Int, val valor: Double)
 
 
